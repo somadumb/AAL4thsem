@@ -4,6 +4,7 @@
 
 #define MAX_SIZE 1000
 
+// Function to perform binary search
 int binarySearch(int arr[], int left, int right, int key) {
     while (left <= right) {
         int mid = left + (right - left) / 2;
@@ -19,6 +20,20 @@ int binarySearch(int arr[], int left, int right, int key) {
         }
     }
     return -1;
+}
+
+// Function to sort the array (Bubble Sort, for simplicity)
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
 int main() {
@@ -40,6 +55,9 @@ int main() {
     for (i = 0; i < n; i++) {
         a[i] = rand() % 100;
     }
+
+    // Sort the array before performing binary search
+    bubbleSort(a, n);
 
     printf("Array elements (sorted):\n");
     for (i = 0; i < n; i++) {
@@ -64,5 +82,14 @@ int main() {
 
     printf("Time Taken in seconds: %f\n", time_taken);
 
-    return 0;
+    return 0;
 }
+
+output : 
+
+Enter the number of elements (up to 1000): 10
+Array elements (sorted):
+3 5 7 12 15 19 22 23 34 99
+Random key to search for: 15
+Element 15 is found at index 4.
+Time Taken in seconds: 0.000004
