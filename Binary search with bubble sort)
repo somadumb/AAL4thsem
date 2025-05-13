@@ -4,6 +4,7 @@
 
 #define MAX_SIZE 1000
 
+// Function for Binary Search
 int binarySearch(int arr[], int left, int right, int key) {
     while (left <= right) {
         int mid = left + (right - left) / 2;
@@ -21,16 +22,29 @@ int binarySearch(int arr[], int left, int right, int key) {
     return -1;
 }
 
-void bubbleSort(int arr[], int n) {
-    int i, j, temp;
-    for (i = 0; i < n - 1; i++) {
-        for (j = 0; j < n - 1 - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+// Function to perform Quick Sort
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
+        
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        
+        int pi = i + 1;
+        
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
 }
 
@@ -54,23 +68,27 @@ int main() {
         a[i] = rand() % 100;
     }
 
+    // Printing unsorted array
     printf("Array elements before sorting:\n");
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n && i < 10; i++) {  // Printing first 10 elements
         printf("%d ", a[i]);
     }
     printf("\n");
 
-    bubbleSort(a, n);
+    // Perform Quick Sort
+    quickSort(a, 0, n - 1);
 
+    // Printing sorted array
     printf("Array elements after sorting:\n");
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n && i < 10; i++) {  // Printing first 10 elements
         printf("%d ", a[i]);
     }
     printf("\n");
 
-    key = rand() % 100;
+    key = rand() % 100;  // Random key to search
     printf("Random key to search for: %d\n", key);
 
+    // Measure time taken for binary search
     start_time = clock();
     result = binarySearch(a, 0, n - 1, key);
     end_time = clock();
@@ -87,3 +105,13 @@ int main() {
 
     return 0;
 }
+
+output : 
+Enter the number of elements (up to 1000): 10
+Array elements before sorting:
+75 39 92 16 34 67 24 50 78 88
+Array elements after sorting:
+16 24 34 39 50 67 75 78 88 92
+Random key to search for: 39
+Element 39 is found at index 3.
+Time Taken in seconds: 0.000002
