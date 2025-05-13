@@ -79,3 +79,20 @@ int main() {
     primMST(graph);
     return 0;
 }
+
+
+output :
+Original Graph (Adjacency Matrix):
+ 0 10  0  5  3 
+10  0  1  0  0 
+ 0  1  0  0  4 
+ 5  0  0  0  8 
+ 3  0  4  8  0 
+
+Minimum Spanning Tree (Prim's Algorithm):
+Edge    Weight
+0 - 3    5
+3 - 4    8
+1 - 2    1
+2 - 4    4
+
