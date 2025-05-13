@@ -71,3 +71,11 @@ int main() {
 
     return 0;
 }
+
+output :
+
+Solution to the N-Queen problem:
+Q . . .
+. . Q .
+. Q . .
+. . . Q
