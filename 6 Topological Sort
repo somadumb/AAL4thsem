@@ -1,1 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+#define MAX 26 
+
+int adj[MAX][MAX];
+int visited[MAX];
+int stack[MAX];
+int top = -1;
+
+void dfs(int v, int n) {
+    visited[v] = 1;
+    int i;
+    for (i = 0; i < n; i++) {
+        if (adj[v][i] && !visited[i]) {
+            dfs(i, n);
+        }
+    }
+    stack[++top] = v;
+}
+
+void topologicalSort(int n) {
+    int i;
+	for (i = 0; i < n; i++)
+        visited[i] = 0;
+
+    for (i = 0; i < n; i++) {
+        if (!visited[i])
+            dfs(i, n);
+    }
+
+    printf("Topological Sort: ");
+    while (top != -1) {
+        printf("%c ", stack[top--] + 'A');
+    }
+    printf("\n");
+}
+
+int main() {
+    int n, e, i, j;
+    char u, v;
+
+    printf("Enter number of vertices (max 26): ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            adj[i][j] = 0;
+
+    printf("Enter number of edges: ");
+    scanf("%d", &e);
+
+    printf("Enter edges (e.g. A B means A -> B):\n");
+    for (i = 0; i < e; i++) {
+        scanf(" %c %c", &u, &v);
+        adj[u - 'A'][v - 'A'] = 1;
+    }
+
+    topologicalSort(n);
+
+    return 0;
+}
