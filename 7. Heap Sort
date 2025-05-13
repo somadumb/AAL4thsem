@@ -47,3 +47,9 @@ int main()
     }
     return 0;
 }
+
+output :
+
+Original Array : 20 18 5 15 3 2
+Array after performing heap sort: 2 3 5 15 18 20
+
